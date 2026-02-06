@@ -1,4 +1,5 @@
 fn main() {
-    // DON'T EDIT THIS SOLUTION FILE!
-    // It will be automatically filled after you finish the exercise.
+    let x = 5;
+
+    println!("x has the value {x}");
 }

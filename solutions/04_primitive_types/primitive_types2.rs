@@ -1,4 +1,24 @@
+// Characters (`char`)
+
 fn main() {
-    // DON'T EDIT THIS SOLUTION FILE!
-    // It will be automatically filled after you finish the exercise.
+    // Note the _single_ quotes, these are different from the double quotes
+    // you've been seeing around.
+    let my_first_initial = 'C';
+    if my_first_initial.is_alphabetic() {
+        println!("Alphabetical!");
+    } else if my_first_initial.is_numeric() {
+        println!("Numerical!");
+    } else {
+        println!("Neither alphabetic nor numeric!");
+    }
+
+    let your_character = 'A';
+
+    if your_character.is_alphabetic() {
+        println!("Alphabetical!");
+    } else if your_character.is_numeric() {
+        println!("Numerical!");
+    } else {
+        println!("Neither alphabetic nor numeric!");
+    }
 }
