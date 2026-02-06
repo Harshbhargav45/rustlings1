@@ -1,5 +1,7 @@
+// You can bring module paths into scopes and provide new names for them with
+// the `use` and `as` keywords.
+
 mod delicious_snacks {
-    // Added `pub` and used the expected alias after `as`.
     pub use self::fruits::PEAR as fruit;
     pub use self::veggies::CUCUMBER as veggie;
 

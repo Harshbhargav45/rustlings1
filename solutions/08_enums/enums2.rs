@@ -13,6 +13,7 @@ enum Message {
     Quit,
 }
 
+
 impl Message {
     fn call(&self) {
         println!("{self:?}");

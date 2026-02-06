@@ -11,14 +11,14 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    // When writing unit tests, it is common to import everything from the outer
-    // module (`super`) using a wildcard.
+    // TODO: Import `is_even`. You can use a wildcard to import everything in
+    // the outer module.
     use super::*;
 
     #[test]
     fn you_can_assert() {
-        assert!(is_even(0));
-        assert!(!is_even(-1));
-        //      ^ You can assert `false` using the negation operator `!`.
+        // TODO: Test the function `is_even` with some values.
+        assert!(is_even(2));
+        assert!(!is_even(1));
     }
 }

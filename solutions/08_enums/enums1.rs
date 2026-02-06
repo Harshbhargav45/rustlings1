@@ -7,6 +7,7 @@ enum Message {
     Quit,
 }
 
+
 fn main() {
     println!("{:?}", Message::Resize);
     println!("{:?}", Message::Move);

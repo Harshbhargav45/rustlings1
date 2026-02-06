@@ -1,3 +1,6 @@
+// You can use the `use` keyword to bring module paths from modules from
+// anywhere and especially from the standard library into your scope.
+
 use std::time::{SystemTime, UNIX_EPOCH};
 
 fn main() {
