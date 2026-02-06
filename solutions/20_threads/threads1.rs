@@ -22,6 +22,7 @@ fn main() {
 
     let mut results = Vec::new();
     for handle in handles {
+        // Collect the results of all threads into the `results` vector.
         results.push(handle.join().unwrap());
     }
 

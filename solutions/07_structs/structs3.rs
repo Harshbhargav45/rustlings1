@@ -1,6 +1,3 @@
-// Structs contain data, but can also have logic. In this exercise, we have
-// defined the `Package` struct, and we want to test some logic attached to it.
-
 #[derive(Debug)]
 struct Package {
     sender_country: String,
@@ -24,14 +21,15 @@ impl Package {
     }
 
     fn is_international(&self) -> bool {
+        //                     ^^^^^^^ added
         self.sender_country != self.recipient_country
     }
 
     fn get_fees(&self, cents_per_gram: u32) -> u32 {
+        //                                  ^^^^^^ added
         self.weight_in_grams * cents_per_gram
     }
 }
-
 
 fn main() {
     // You can optionally experiment here.

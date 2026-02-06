@@ -36,6 +36,7 @@ mod tests {
         let your_order = Order {
             name: String::from("Hacker in Rust"),
             count: 1,
+            // Struct update syntax
             ..order_template
         };
 
@@ -48,4 +49,3 @@ mod tests {
         assert_eq!(your_order.count, 1);
     }
 }
-

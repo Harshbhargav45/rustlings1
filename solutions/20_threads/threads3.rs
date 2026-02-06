@@ -1,4 +1,4 @@
-use std::{sync::{mpsc, Arc}, thread, time::Duration};
+use std::{sync::mpsc, thread, time::Duration};
 
 struct Queue {
     first_half: Vec<u32>,
@@ -15,25 +15,22 @@ impl Queue {
 }
 
 fn send_tx(q: Queue, tx: mpsc::Sender<u32>) {
-    let q = Arc::new(q);
-    let q1 = Arc::clone(&q);
-    let tx1 = tx.clone();
-
+    // Clone the sender `tx` first.
+    let tx_clone = tx.clone();
     thread::spawn(move || {
-        for val in q1.first_half.clone() {
+        for val in q.first_half {
             println!("Sending {val:?}");
-            tx1.send(val).unwrap();
+            // Then use the clone in the first thread. This means that
+            // `tx_clone` is moved to the first thread and `tx` to the second.
+            tx_clone.send(val).unwrap();
             thread::sleep(Duration::from_millis(250));
         }
     });
 
-    let q2 = Arc::clone(&q);
-    let tx2 = tx.clone();
-
     thread::spawn(move || {
-        for val in q2.second_half.clone() {
+        for val in q.second_half {
             println!("Sending {val:?}");
-            tx2.send(val).unwrap();
+            tx.send(val).unwrap();
             thread::sleep(Duration::from_millis(250));
         }
     });

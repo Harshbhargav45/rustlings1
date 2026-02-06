@@ -25,41 +25,24 @@ enum ParsePersonError {
     ParseInt(ParseIntError),
 }
 
-// TODO: Complete this `FromStr` implementation to be able to parse a `Person`
-// out of a string in the form of "Mark,20".
-// Note that you'll need to parse the age component into a `u8` with something
-// like `"4".parse::<u8>()`.
-//
-// Steps:
-// 1. Split the given string on the commas present in it.
-// 2. If the split operation returns less or more than 2 elements, return the
-//    error `ParsePersonError::BadLen`.
-// 3. Use the first element from the split operation as the name.
-// 4. If the name is empty, return the error `ParsePersonError::NoName`.
-// 5. Parse the second element from the split operation into a `u8` as the age.
-// 6. If parsing the age fails, return the error `ParsePersonError::ParseInt`.
 impl FromStr for Person {
     type Err = ParsePersonError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if !s.contains(',') {
+        let mut split = s.split(',');
+        let (Some(name), Some(age), None) = (split.next(), split.next(), split.next()) else {
+            //                      ^^^^ there should be no third element
             return Err(ParsePersonError::BadLen);
-        }
-        let mut parts = s.split(',');
-        let name = match parts.next() {
-            Some(n) if !n.is_empty() => n,
-            _ => return Err(ParsePersonError::NoName),
         };
-        let age_str = match parts.next() {
-            Some(a) => a,
-            None => return Err(ParsePersonError::BadLen),
-        };
-        if parts.next().is_some() {
-            return Err(ParsePersonError::BadLen);
+
+        if name.is_empty() {
+            return Err(ParsePersonError::NoName);
         }
-        let age = age_str.parse::<u8>().map_err(ParsePersonError::ParseInt)?;
-        Ok(Person {
-            name: name.to_string(),
+
+        let age = age.parse().map_err(ParsePersonError::ParseInt)?;
+
+        Ok(Self {
+            name: name.into(),
             age,
         })
     }
